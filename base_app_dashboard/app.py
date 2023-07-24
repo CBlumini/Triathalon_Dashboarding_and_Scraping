@@ -13,6 +13,10 @@ from dash import dash_table
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 from custom_frame import ProcessedData
+import ssl
+
+ssl._create_default_https_context = ssl._create_unverified_context
+
 
 # stop pandas from issuing ceratain warnings
 pd.options.mode.chained_assignment = None  # default='warn'
@@ -28,8 +32,8 @@ colors = {
 
 # ingest data
 url = "https://raw.githubusercontent.com/CBlumini/Triathlon_Dashboarding_and_Scraping/main/data/Santa-Cruz-Sprint.csv"
-df = pd.read_csv(url)
-print(df.head())
+# df = pd.read_csv(url)
+# print(df.head())
 data_inst = ProcessedData(url=url)
 data = data_inst.get_cleaned_data()
 
