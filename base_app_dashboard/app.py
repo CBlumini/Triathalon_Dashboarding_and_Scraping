@@ -27,7 +27,10 @@ colors = {
 }
 
 # ingest data
-data_inst = ProcessedData(url='https://github.com/CBlumini/heroku_dep_2/raw/main/Santa-Cruz-Sprint.csv')
+url = "https://raw.githubusercontent.com/CBlumini/Triathlon_Dashboarding_and_Scraping/main/data/Santa-Cruz-Sprint.csv"
+df = pd.read_csv(url)
+print(df.head())
+data_inst = ProcessedData(url=url)
 data = data_inst.get_cleaned_data()
 
 # get data for the females chart
