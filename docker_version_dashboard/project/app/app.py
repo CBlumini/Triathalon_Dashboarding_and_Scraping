@@ -33,7 +33,7 @@ colors = {
 }
 
 # ingest data
-data = pd.read_csv('https://github.com/CBlumini/heroku_dep_2/raw/main/Santa-Cruz-Sprint.csv', header=0, index_col=None)
+data = pd.read_csv("https://raw.githubusercontent.com/CBlumini/Triathlon_Dashboarding_and_Scraping/main/data/Santa-Cruz-Sprint.csv", header=0, index_col=None)
 data = data[data['Age'] > 1]
 #females = data[data['Gender'] == 'F']
 females = data
