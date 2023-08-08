@@ -12,7 +12,7 @@ import plotly.graph_objects as go
 from dash import dash_table
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
-from custom_frame import ProcessedData
+from utils.custom_frame import ProcessedData
 import ssl
 
 ssl._create_default_https_context = ssl._create_unverified_context

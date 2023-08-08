@@ -15,8 +15,8 @@ class ProcessedData:
             self.df = pd.read_csv(url, header=0, index_col=None)
 
     # create class methods
-    @classmethod
-    def determine_agegroup(cls, row):
+    @staticmethod
+    def determine_agegroup(row):
         start_ages = [10, 18, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85]
         end_ages = [17, 19, 24, 29, 34, 39, 44, 49, 54, 59, 64, 69, 74, 79, 84, 100]
         age = int(row["Age"])
@@ -24,8 +24,8 @@ class ProcessedData:
             if start <= age <= stop:
                 return "%d-%d" % (start, stop)
 
-    @classmethod
-    def convertTime(cls, time):
+    @staticmethod
+    def convertTime(time):
         temp = time.split(":")
         timeMinutes = (int(temp[0]) * 60) + int(temp[1]) + int(temp[2]) / 60
         return timeMinutes
