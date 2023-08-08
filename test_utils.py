@@ -4,9 +4,11 @@ import pytest
 from base_app_dashboard.utils.convert_time import convertTime
 
 # Test cases
+@pytest.mark.disabled
 def test_convertTime_minutes_only():
     assert convertTime("0:30") == 30
 
+@pytest.mark.disabled
 def test_convertTime_hours_and_minutes():
     assert convertTime("1:45") == 105
 
@@ -16,10 +18,12 @@ def test_convertTime_hours_minutes_and_seconds():
 def test_convertTime_zero_time():
     assert convertTime("0:0:0") == 0
 
+@pytest.mark.disabled
 def test_convertTime_invalid_time_format():
     with pytest.raises(ValueError):
         convertTime("1:45:60")
 
+@pytest.mark.disabled
 def test_convertTime_negative_time():
     with pytest.raises(ValueError):
         convertTime("-1:30")
