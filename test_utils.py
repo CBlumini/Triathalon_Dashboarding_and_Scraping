@@ -1,7 +1,7 @@
 import pytest
 
 # Import the function you want to test
-from base_app_dashboard.convert_time import convertTime
+from base_app_dashboard.utils.convert_time import convertTime
 
 # Test cases
 def test_convertTime_minutes_only():
