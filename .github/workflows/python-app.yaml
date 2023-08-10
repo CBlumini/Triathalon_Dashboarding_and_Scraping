@@ -40,6 +40,6 @@ jobs:
     - name: Test with pytest
       run: |
         pytest -m "not disabled"
-    - name: Set status output
-      run: echo "SUCCESS" >> $GITHUB_ENV
-      if: success()
+    # - name: Set status output
+    #   run: echo "SUCCESS" >> $GITHUB_ENV
+    #   if: success()

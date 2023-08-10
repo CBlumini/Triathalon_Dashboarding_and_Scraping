@@ -3,6 +3,7 @@ name: Publish Docker image
 on:
   workflow_run:
     workflows: ["Test Python Appliction"]
+    branches: [main]
     types:
       - completed
 
