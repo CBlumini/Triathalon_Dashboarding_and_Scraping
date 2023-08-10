@@ -4,7 +4,7 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: Test Pyhton Appliction
+name: Test Python Appliction
 
 on:
   push:
@@ -39,13 +39,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest
-
-    # - name: Build and push docker
-    #   uses: mr-smithers-excellent/docker-build-push@v6
-    #   with:
-    #     image: blumini509/triathlon_data
-    #     dockerfile: docker_version_dashboard/project/Dockerfile
-    #     registry: docker.io
-    #     username: ${{ secrets.DOCKER_USERNAME }}
-    #     password: ${{ secrets.DOCKER_TOKEN }}
+        pytest -m "not disabled"
+    - name: Set status output
+      run: echo "SUCCESS" >> $GITHUB_ENV
+      if: success()
