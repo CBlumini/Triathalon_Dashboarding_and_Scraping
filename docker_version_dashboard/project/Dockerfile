@@ -1,3 +1,4 @@
+# run with docker run -d -p 8050:8050 <img id>
 FROM python:3.8.6-slim-buster
 
 # set working directory in container
