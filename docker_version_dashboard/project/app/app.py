@@ -3,7 +3,7 @@ import dash
 from dash import dcc
 from dash import html
 import plotly.express as px
-import dash_table
+from dash import dash_table
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 from convert_time import *
@@ -208,5 +208,6 @@ def update_figure_parcoords(places):
 
     return para_cor
 
-# if __name__ == '__main__':
-#     app.run_server(debug=True)
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
