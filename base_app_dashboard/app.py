@@ -14,6 +14,7 @@ from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 from utils.custom_frame import ProcessedData
 import ssl
+import argparse
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -283,4 +284,8 @@ def update_figure_scat(places):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config")
+    args = parser.parse_args()
+    print(args)
     app.run_server(debug=True)
