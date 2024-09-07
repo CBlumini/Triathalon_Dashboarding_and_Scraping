@@ -3,9 +3,6 @@
 
 # https://dash-bootstrap-components.opensource.faculty.ai/docs/components/layout/
 
-
-
-from dash.development.base_component import Component
 import pandas as pd
 import dash
 from dash import dcc
@@ -21,7 +18,7 @@ from convert_time import *
 # stop pandas from issuing ceratain warnings
 pd.options.mode.chained_assignment = None  # default='warn'
 
-#external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
 server = app.server
@@ -33,9 +30,10 @@ colors = {
 }
 
 # ingest data
-data = pd.read_csv("https://raw.githubusercontent.com/CBlumini/Triathlon_Dashboarding_and_Scraping/main/data/Santa-Cruz-Sprint.csv", header=0, index_col=None)
+data = pd.read_csv(
+    "https://raw.githubusercontent.com/CBlumini/Triathlon_Dashboarding_and_Scraping/main/data/Santa-Cruz-Sprint.csv", header=0, index_col=None)
 data = data[data['Age'] > 1]
-#females = data[data['Gender'] == 'F']
+# females = data[data['Gender'] == 'F']
 females = data
 
 datapie = data
@@ -46,7 +44,8 @@ datapie['Age Group'] = datapie.apply(determine_agegroup, axis=1)
 
 time_df = create_time_columns(females)
 
-reduced2 = time_df[["Name", "Swim Minutes", "Swim+T1", "Plus Bike", "Plus T2", "Total", "Gender Place"]]
+reduced2 = time_df[["Name", "Swim Minutes", "Swim+T1",
+                    "Plus Bike", "Plus T2", "Total", "Gender Place"]]
 reduced2["Start"] = 0
 reduced2 = reduced2[reduced2['Total'] > 60]
 
@@ -60,47 +59,48 @@ app.layout = html.Div([
     dbc.Container([
         dbc.Row([
             dbc.Col(html.H1('Welcome to the Triathlon Data Analyzer'))
-    ]),
+        ]),
         dbc.Row([
-            dbc.Col(html.H6(children='This app allows for performance plotting of certain local bay area triathlons.'))
-    ]),
+            dbc.Col(
+                html.H6(children='This app allows for performance plotting of certain local bay area triathlons.'))
+        ]),
+        # dbc.Row([
+        #     dbc.Col(html.H6(children='This is a work in progress'
+        #                              ' Now with case-INSENSITIVE searching'))
+        # ]),
         dbc.Row([
-            dbc.Col(html.H6(children='This is a work in progress'
-                                     ' Now with case-INSENSITIVE searching'))
-    ]),
-        dbc.Row([
-        dash_table.DataTable(
-            id='table-sorting-filtering',
-            columns=[{'name': i, 'id': i} for i in dash_columns],
-            data=time_df.to_dict('records'),
-            style_table={'overflowX': 'auto'},
-            style_header={
-                'backgroundColor': 'rgb(30, 30, 30)',
-                'color': 'white'
-            },
-            style_cell={
-                'height': '90',
-                # 'minWidth': '110%',
-                'minWidth': '60px', 'width': '100px', 'maxWidth': '140px',
-                'whiteSpace': 'normal', 'textAlign': 'center',
-                'backgroundColor': 'rgb(0, 0, 0)',
-                'color': 'white'},
-            style_cell_conditional=[{
-                'if': {'column_id': 'Name'},
-                'textAlign': 'center'
-            }],
-            page_current=0,
-            page_size=15,
-            filter_action='native',
-            filter_options={'case':'insensitive'},
-            filter_query='',
-            sort_action='native',
-            sort_mode='single',
-            sort_by=[],
-            style_as_list_view=True,
-            hidden_columns=[],
-        ),
-    ]),
+            dash_table.DataTable(
+                id='table-sorting-filtering',
+                columns=[{'name': i, 'id': i} for i in dash_columns],
+                data=time_df.to_dict('records'),
+                style_table={'overflowX': 'auto'},
+                style_header={
+                    'backgroundColor': 'rgb(30, 30, 30)',
+                    'color': 'white'
+                },
+                style_cell={
+                    'height': '90',
+                    # 'minWidth': '110%',
+                    'minWidth': '60px', 'width': '100px', 'maxWidth': '140px',
+                    'whiteSpace': 'normal', 'textAlign': 'center',
+                    'backgroundColor': 'rgb(0, 0, 0)',
+                    'color': 'white'},
+                style_cell_conditional=[{
+                    'if': {'column_id': 'Name'},
+                    'textAlign': 'center'
+                }],
+                page_current=0,
+                page_size=15,
+                filter_action='native',
+                filter_options={'case': 'insensitive'},
+                filter_query='',
+                sort_action='native',
+                sort_mode='single',
+                sort_by=[],
+                style_as_list_view=True,
+                hidden_columns=[],
+            ),
+        ]),
         dbc.Row([
             dbc.Col([
                 html.H5("Age/Gender Distribution"),
@@ -166,10 +166,11 @@ app.layout = html.Div([
                 200: '200'
             }
         ),
-                      
+
     ])
 ])
-        
+
+
 @app.callback(
     Output('pie-chart', 'figure'),
     Input('names', 'value'),
@@ -200,7 +201,8 @@ def update_figure_scat(places):
     Output(component_id='par-with-slider', component_property='figure'),
     Input(component_id='par-place-slider', component_property='value'))
 def update_figure_scat(places):
-    reduced3 = females[["Name", "Swim Minutes", "Swim+T1", "Plus Bike", "Plus T2", "Total", "Gender Place"]]
+    reduced3 = females[["Name", "Swim Minutes", "Swim+T1",
+                        "Plus Bike", "Plus T2", "Total", "Gender Place"]]
     reduced3["Start"] = 0
     reduced3 = reduced3[reduced3['Plus Bike'] > 50]
     reduced3 = reduced3[reduced3['Total'] > 60]
